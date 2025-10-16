@@ -1,0 +1,43 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "extranet",
+  "projectType": "application",
+  "sourceRoot": "apps/extranet/src",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/extranet",
+        "main": "apps/extranet/src/main.ts",
+        "tsConfig": "apps/extranet/tsconfig.app.json",
+        "polyfills": ["zone.js"],
+        "assets": ["apps/extranet/src/favicon.ico", "apps/extranet/src/assets"],
+        "styles": ["apps/extranet/src/styles.scss"],
+        "inlineStyleLanguage": "scss"
+      }
+    },
+    "serve": {
+      "executor": "@nx/angular:dev-server",
+      "options": {
+        "buildTarget": "extranet:build",
+        "port": 4300
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": ["apps/extranet/**/*.ts", "apps/extranet/**/*.html"],
+        "fix": true
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/extranet"],
+      "options": {
+        "jestConfig": "apps/extranet/jest.config.ts"
+      }
+    }
+  },
+  "tags": ["scope:extranet", "type:app"]
+}

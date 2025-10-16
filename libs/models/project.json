@@ -1,0 +1,23 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "models",
+  "projectType": "library",
+  "sourceRoot": "libs/models/src",
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": ["libs/models/**/*.ts"],
+        "fix": true
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/models"],
+      "options": {
+        "jestConfig": "libs/models/jest.config.ts"
+      }
+    }
+  },
+  "tags": ["scope:shared", "type:lib"]
+}

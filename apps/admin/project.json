@@ -1,0 +1,43 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "admin",
+  "projectType": "application",
+  "sourceRoot": "apps/admin/src",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/admin",
+        "main": "apps/admin/src/main.ts",
+        "tsConfig": "apps/admin/tsconfig.app.json",
+        "polyfills": ["zone.js"],
+        "assets": ["apps/admin/src/favicon.ico", "apps/admin/src/assets"],
+        "styles": ["apps/admin/src/styles.scss"],
+        "inlineStyleLanguage": "scss"
+      }
+    },
+    "serve": {
+      "executor": "@nx/angular:dev-server",
+      "options": {
+        "buildTarget": "admin:build",
+        "port": 4400
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": ["apps/admin/**/*.ts", "apps/admin/**/*.html"],
+        "fix": true
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/admin"],
+      "options": {
+        "jestConfig": "apps/admin/jest.config.ts"
+      }
+    }
+  },
+  "tags": ["scope:admin", "type:app"]
+}
