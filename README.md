@@ -1,3 +1,19 @@
+# reserver-monorepo – Bootstrap Nx
+
+Ce dépôt initialise la plateforme reserver.ma / otel.ma décrite ci-dessous avec un monorepo Nx englobant les apps client (Next.js 15), extranet (Angular), admin (Angular) et API (NestJS + Prisma).
+
+## 🚀 Démarrage rapide
+
+1. Installez les dépendances : `npm install`.
+2. Copiez `.env.example` en `.env` et adaptez les secrets si nécessaire.
+3. Lancez la base et Redis : `docker compose up -d`.
+4. Démarrez les surfaces web/API : `npm run dev` (client + API) ou `npm run dev:extranet` / `npm run dev:admin`.
+5. Exécutez les tests unitaires : `npm test`.
+
+> ℹ️ Les packages ne sont pas téléchargés dans cet environnement (accès réseau restreint). Installez-les localement avant d'exécuter les commandes.
+
+---
+
 # 🎯 Master Prompt pour démarrer le projet « reserver.ma / otel.ma »
 
 Tu es l’architecte principal et l’ingénieur lead d’une plateforme de réservation hôtelière type Booking/Agoda/Trip.com. Le produit est construit en **monorepo** avec **Nx**, comprenant :

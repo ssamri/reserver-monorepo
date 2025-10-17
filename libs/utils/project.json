@@ -1,0 +1,23 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "utils",
+  "projectType": "library",
+  "sourceRoot": "libs/utils/src",
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": ["libs/utils/**/*.ts"],
+        "fix": true
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/utils"],
+      "options": {
+        "jestConfig": "libs/utils/jest.config.ts"
+      }
+    }
+  },
+  "tags": ["scope:shared", "type:lib"]
+}

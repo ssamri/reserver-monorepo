@@ -1,0 +1,29 @@
+.translation {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.translation__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.translation__kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  color: #0d6efd;
+  margin-bottom: 0.5rem;
+}
+
+.translation__toolbar {
+  display: flex;
+  align-items: center;
+}
+
+textarea.form-control {
+  resize: vertical;
+}

@@ -1,0 +1,110 @@
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  CLIENT
+  HOTEL
+  ADMIN
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  role      Role
+  createdAt DateTime @default(now())
+  bookings  Booking[]
+  hotels    Hotel[]  @relation("HotelOwners")
+}
+
+model Hotel {
+  id          String      @id @default(cuid())
+  name        String
+  slug        String      @unique
+  city        String
+  address     String
+  description String
+  stars       Int
+  owner       User?       @relation("HotelOwners", fields: [ownerId], references: [id])
+  ownerId     String?
+  roomTypes   RoomType[]
+  photos      Photo[]
+  isActive    Boolean     @default(false)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model RoomType {
+  id          String    @id @default(cuid())
+  name        String
+  occupancy   Int
+  basePrice   Decimal   @db.Decimal(10, 2)
+  hotel       Hotel     @relation(fields: [hotelId], references: [id])
+  hotelId     String
+  ratePlans   RatePlan[]
+  inventories Inventory[]
+}
+
+model RatePlan {
+  id          String   @id @default(cuid())
+  code        String   @unique
+  name        String
+  description String?
+  roomType    RoomType @relation(fields: [roomTypeId], references: [id])
+  roomTypeId  String
+  refundable  Boolean  @default(true)
+}
+
+model Inventory {
+  id         String   @id @default(cuid())
+  date       DateTime
+  rooms      Int
+  price      Decimal  @db.Decimal(10, 2)
+  roomType   RoomType @relation(fields: [roomTypeId], references: [id])
+  roomTypeId String
+  ratePlan   RatePlan @relation(fields: [ratePlanId], references: [id])
+  ratePlanId String
+}
+
+model Booking {
+  id           String   @id @default(cuid())
+  reference    String   @unique
+  checkIn      DateTime
+  checkOut     DateTime
+  guests       Int
+  rooms        Int
+  user         User     @relation(fields: [userId], references: [id])
+  userId       String
+  hotel        Hotel    @relation(fields: [hotelId], references: [id])
+  hotelId      String
+  roomType     RoomType @relation(fields: [roomTypeId], references: [id])
+  roomTypeId   String
+  ratePlan     RatePlan @relation(fields: [ratePlanId], references: [id])
+  ratePlanId   String
+  totalAmount  Decimal  @db.Decimal(10, 2)
+  currency     String   @default("MAD")
+  status       BookingStatus @default(CONFIRMED)
+  createdAt    DateTime @default(now())
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
+
+model Photo {
+  id      String @id @default(cuid())
+  url     String
+  caption String?
+  hotel   Hotel  @relation(fields: [hotelId], references: [id])
+  hotelId String
+  order   Int    @default(0)
+}

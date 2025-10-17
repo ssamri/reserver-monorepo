@@ -1,0 +1,32 @@
+<section class="dashboard" aria-labelledby="dashboard-title">
+  <header class="dashboard__header">
+    <div>
+      <p class="dashboard__kicker">Bienvenue 👋</p>
+      <h1 id="dashboard-title">Suivez vos performances en un clin d'œil</h1>
+    </div>
+    <button type="button" class="btn btn-primary btn-lg">Ajouter une offre</button>
+  </header>
+
+  <div class="dashboard__metrics" role="list">
+    <article class="metric" *ngFor="let metric of metrics()" role="listitem">
+      <h2 class="metric__label">{{ metric.label }}</h2>
+      <p class="metric__value">{{ metric.value }}<span aria-hidden="true">{{ metric.suffix }}</span></p>
+      <p class="metric__trend" [class.metric__trend--up]="metric.trend >= 0">
+        <span aria-hidden="true">▲</span> {{ metric.trend }}%
+        <span class="visually-hidden">Variation par rapport à la semaine précédente</span>
+      </p>
+    </article>
+  </div>
+
+  <section class="dashboard__empty" aria-label="Prochaines étapes">
+    <h2>Complétez votre contenu</h2>
+    <p class="text-muted">
+      Ajoutez vos types de chambres, configurez vos disponibilités et envoyez vos tarifs pour commencer à
+      recevoir des réservations.
+    </p>
+    <div class="d-flex gap-3">
+      <button type="button" class="btn btn-outline-secondary">Configurer le calendrier</button>
+      <button type="button" class="btn btn-outline-secondary">Mettre à jour les photos</button>
+    </div>
+  </section>
+</section>

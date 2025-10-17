@@ -1,0 +1,23 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "i18n",
+  "projectType": "library",
+  "sourceRoot": "libs/i18n/src",
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": ["libs/i18n/**/*.ts"],
+        "fix": true
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/i18n"],
+      "options": {
+        "jestConfig": "libs/i18n/jest.config.ts"
+      }
+    }
+  },
+  "tags": ["scope:shared", "type:lib"]
+}

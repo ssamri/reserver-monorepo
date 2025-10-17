@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Nx Monorepo",
+  "compilerOptions": {
+    "target": "ES2021",
+    "lib": ["ES2021", "DOM"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "allowJs": false,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "skipLibCheck": true,
+    "types": ["node", "jest"],
+    "baseUrl": ".",
+    "paths": {
+      "@reserver/ui": ["libs/ui/src/index.ts"],
+      "@reserver/models": ["libs/models/src/index.ts"],
+      "@reserver/utils": ["libs/utils/src/index.ts"],
+      "@reserver/i18n": ["libs/i18n/src/index.ts"],
+      "@reserver/models/*": ["libs/models/src/lib/*"],
+      "@reserver/utils/*": ["libs/utils/src/lib/*"],
+      "@reserver/i18n/*": ["libs/i18n/src/lib/*"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"],
+  "references": []
+}
